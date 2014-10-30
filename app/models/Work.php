@@ -4,7 +4,8 @@ class Work extends \Eloquent {
 
 	// Add your validation rules here
 	public static $rules = [
-		'title' => 'required'
+		'title' => 'required',
+		'duration' => 'numeric'
 	];
 
 	// Don't forget to fill this array

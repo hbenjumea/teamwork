@@ -9,7 +9,7 @@ class WorksController extends \BaseController {
 	 */
 	public function index()
 	{
-		$works = Work::orderBy('inidate','desc')->get();
+		$works = Work::orderBy('enddate','desc')->get();
 
 		return View::make('works.index', compact('works'));
 	}

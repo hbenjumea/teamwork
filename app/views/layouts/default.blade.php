@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 		<title>TeamWork</title>
 			{{HTML::style('bower_components/foundation/css/foundation.css')}}
+			{{HTML::style('bower_components/foundation-datepicker/stylesheets/foundation-datepicker.css')}}
+			{{HTML::script('bower_components/jquery/dist/jquery.js')}}
 	</head>
 	<body>
 		<nav class="top-bar" data-topbar role="navigation">
@@ -41,10 +43,12 @@
 				@yield('content')
 			</div>
 		</div>
-		{{HTML::script('bower_components/jquery/dist/jquery.js')}}
+		
 		{{HTML::script('bower_components/foundation/js/foundation.min.js')}}
+		{{HTML::script('bower_components/foundation-datepicker/js/foundation-datepicker.js')}}
 		<script>
 			$(document).foundation();
 		</script>
+		@yield('scri')
 	</body>
 </html>
