@@ -37,8 +37,8 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td id="startDate">2012-02-20</td>
-					<td id="endDate">2012-02-25</td>
+					<td >{{ Form::text('inidate',null,array('id' => 'inidate')) }}</td>
+					<td >{{ Form::text('enddate',null,array('id' => 'enddate')) }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -52,53 +52,50 @@
 	<script>
 			$(function () {
 				$('#alert').hide();
-				var startDate = new Date();
-				var endDate = new Date();
-				$('#dp4').fdatepicker()
-					.on('changeDate', function (ev) {
+				
+				// implementation of disabled form fields
+				var nowTemp = new Date();
+				var year = nowTemp.getFullYear();
+				var month = nowTemp.getMonth() + 1;
+				var day = nowTemp.getDate();
+				var now = new Date(year, nowTemp.getMonth(), day, 0, 0, 0, 0);
+				
+				var startDate = now;
+				var endDate = now;
+				
+				$('#inidate').val(year+'-'+month+'-'+day);
+				$('#enddate').val(year+'-'+month+'-'+day);
+				
+				$('#dp4').fdatepicker({
+					onRender: function (date) {
+						return date.valueOf() < now.valueOf() ? 'disabled' : '';
+					}
+				}).on('changeDate', function (ev) {
 					if (ev.date.valueOf() > endDate.valueOf()) {
 						$('#alert').show().find('strong').text('The start date can not be greater then the end date');
 					} else {
 						$('#alert').hide();
 						startDate = new Date(ev.date);
-						$('#startDate').text($('#dp4').data('date'));
+						$('#inidate').val($('#dp4').data('date'));
 					}
 					$('#dp4').fdatepicker('hide');
 				});
-				$('#dp5').fdatepicker()
-					.on('changeDate', function (ev) {
+				
+				$('#dp5').fdatepicker({
+					onRender: function (date) {
+						return date.valueOf() < now.valueOf() ? 'disabled' : '';
+					}
+				}).on('changeDate', function (ev) {
 					if (ev.date.valueOf() < startDate.valueOf()) {
 						$('#alert').show().find('strong').text('The end date can not be less then the start date');
 					} else {
 						$('#alert').hide();
 						endDate = new Date(ev.date);
-						$('#endDate').text($('#dp5').data('date'));
+						$('#enddate').val($('#dp5').data('date'));
 					}
 					$('#dp5').fdatepicker('hide');
 				});
-				// implementation of disabled form fields
-				var nowTemp = new Date();
-				var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-				var checkin = $('#dpd4').fdatepicker({
-					onRender: function (date) {
-						return date.valueOf() < now.valueOf() ? 'disabled' : '';
-					}
-				}).on('changeDate', function (ev) {
-					if (ev.date.valueOf() > checkout.date.valueOf()) {
-						var newDate = new Date(ev.date)
-						newDate.setDate(newDate.getDate() + 1);
-						checkout.update(newDate);
-					}
-					checkin.hide();
-					$('#dpd5')[0].focus();
-				}).data('datepicker');
-				var checkout = $('#dpd5').fdatepicker({
-					onRender: function (date) {
-						return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-					}
-				}).on('changeDate', function (ev) {
-					checkout.hide();
-				}).data('datepicker');
+				
 			});
 	</script>
 @stop
