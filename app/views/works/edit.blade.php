@@ -12,6 +12,7 @@
 
     {{ Form::label('member_id', 'Member') }}
     {{ Form::select('member_id',$members) }}
+	{{ $errors->first('member_id','<small class="error">:message</small>') }}
 
 	{{ Form::label('duration', 'Duration') }}
     {{ Form::text('duration') }}

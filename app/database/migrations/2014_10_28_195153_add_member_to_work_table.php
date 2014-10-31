@@ -15,6 +15,7 @@ class AddMemberToWorkTable extends Migration {
 		Schema::table('works', function(Blueprint $table)
 		{
 			$table->integer('member_id');
+			
 		});
 	}
 
