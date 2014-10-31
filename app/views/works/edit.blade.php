@@ -25,11 +25,11 @@
 			<thead>
 				<tr>
 					<th>Start date&nbsp;
-						<a href="#" class="button small" id="dp4" data-date-format="yyyy-mm-dd" >Change</a>
+						<a href="#" class="button small" id="dp4" data-date-format="yyyy-mm-dd" data-date="{{{ $work->inidate}}}" >Change</a>
 						{{ $errors->first('dp4','<small class="error">:message</small>') }}
 					</th>
 					<th>End date&nbsp;
-						<a href="#" class="button small" id="dp5" data-date-format="yyyy-mm-dd" >Change</a>
+						<a href="#" class="button small" id="dp5" data-date-format="yyyy-mm-dd" data-date="{{{ $work->enddate}}}">Change</a>
 						{{ $errors->first('dp5','<small class="error">:message</small>') }}
 					</th>
 				</tr>
@@ -64,8 +64,10 @@
 				var day = nowTemp.getDate();
 				var now = new Date(year, nowTemp.getMonth(), day, 0, 0, 0, 0);
 				
-				//var startDate = now;
-				//var endDate = now;
+				var startDate = $('#inidate').val();
+				var endDate = $('#enddate').val();
+				
+				
 				
 				//$('#inidate').val(year+'-'+month+'-'+day);
 				//$('#enddate').val(year+'-'+month+'-'+day);
